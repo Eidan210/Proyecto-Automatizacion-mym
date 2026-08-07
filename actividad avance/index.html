@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Mym Designsx – Tienda de productos personalizados. Camisetas, buzos y accesorios con tu diseño. Personaliza y compra en línea.">
+  <meta name="keywords" content="productos personalizados, camisetas personalizadas, buzos, ropa personalizada, diseño propio">
+  <meta name="author" content="Eidan Carreño">
+  <title>Mym Designsx | Productos Personalizados</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✨</text></svg>">
+</head>
+<body>
+
+  <!-- ═══ PAGE LOADER ═══ -->
+  <div class="page-loader" id="pageLoader">
+    <div class="spinner"></div>
+  </div>
+
+  <!-- ═══ TOAST CONTAINER ═══ -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- ═══ NAVBAR ═══ -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <div class="navbar-logo" id="navLogo">Mym<span> Designsx</span></div>
+      
+      <div class="navbar-nav" id="navLinks">
+        <a class="nav-link active" data-page="landing">Inicio</a>
+        <a class="nav-link" data-page="catalog">Catálogo</a>
+        <div class="nav-dropdown" id="navCategoriesDropdown">
+          <a class="nav-link" id="navCategoriesBtn">Categorías ▾</a>
+          <div class="nav-dropdown-menu" id="navCategoriesMenu">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+        <a class="nav-link" data-page="catalog" data-filter="personalizable">Personalizar</a>
+      </div>
+
+      <div class="navbar-actions">
+        <div class="theme-toggle" id="themeToggle" title="Cambiar tema">
+          <div class="toggle-ball">☀️</div>
+        </div>
+        
+        <button class="navbar-icon-btn" id="cartBtn" title="Carrito">
+          🛒
+          <span class="badge-count hidden" id="cartBadge">0</span>
+        </button>
+        
+        <button class="navbar-icon-btn" id="userBtn" title="Mi cuenta">
+          👤
+        </button>
+        
+        <div class="menu-toggle" id="menuToggle">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ═══ CART SIDEBAR ═══ -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <aside class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+      <h2>🛍️ Tu Carrito <span class="cart-count-label" id="cartCountLabel">(0 items)</span></h2>
+      <button class="cart-close" id="cartClose">✕</button>
+    </div>
+    <div class="cart-items" id="cartItems">
+      <!-- Rendered by JS -->
+    </div>
+    <div class="cart-footer" id="cartFooter">
+      <div class="cart-summary">
+        <div class="cart-summary-row">
+          <span>Subtotal</span>
+          <span id="cartSubtotal">$0</span>
+        </div>
+        <div class="cart-summary-row">
+          <span>IVA (19%)</span>
+          <span id="cartTax">$0</span>
+        </div>
+        <div class="cart-summary-row total">
+          <span>Total</span>
+          <span id="cartTotal">$0</span>
+        </div>
+      </div>
+      <button class="btn btn-primary btn-lg" style="width:100%" id="checkoutBtn">
+        Proceder al pago
+        <span class="btn-shimmer"></span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ═══ AUTH MODAL – LOGIN ═══ -->
+  <div class="modal-overlay" id="loginModal">
+    <div class="modal">
+      <button class="modal-close" data-close-modal="loginModal">✕</button>
+      <h2>Bienvenido de vuelta</h2>
+      <p class="modal-subtitle">Inicia sesión para acceder a tu cuenta</p>
+      <form class="auth-form" id="loginForm">
+        <div class="form-group">
+          <label for="loginEmail">Correo electrónico</label>
+          <input type="email" id="loginEmail" class="form-input" placeholder="tu@email.com" required>
+        </div>
+        <div class="form-group">
+          <label for="loginPassword">Contraseña</label>
+          <input type="password" id="loginPassword" class="form-input" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg" style="width:100%">Iniciar Sesión</button>
+      </form>
+      <div class="auth-divider">o</div>
+      <p class="auth-switch">¿No tienes cuenta? <a id="showRegister">Regístrate aquí</a></p>
+    </div>
+  </div>
+
+  <!-- ═══ AUTH MODAL – REGISTER ═══ -->
+  <div class="modal-overlay" id="registerModal">
+    <div class="modal">
+      <button class="modal-close" data-close-modal="registerModal">✕</button>
+      <h2>Crea tu cuenta</h2>
+      <p class="modal-subtitle">Únete a Mym Designsx y empieza a personalizar</p>
+      <form class="auth-form" id="registerForm">
+        <div class="form-group">
+          <label for="regName">Nombre</label>
+          <input type="text" id="regName" class="form-input" placeholder="Tu nombre" required>
+        </div>
+        <div class="form-group">
+          <label for="regLastname">Apellido</label>
+          <input type="text" id="regLastname" class="form-input" placeholder="Tu apellido" required>
+        </div>
+        <div class="form-group">
+          <label for="regEmail">Correo electrónico</label>
+          <input type="email" id="regEmail" class="form-input" placeholder="tu@email.com" required>
+        </div>
+        <div class="form-group">
+          <label for="regPhone">Teléfono</label>
+          <input type="tel" id="regPhone" class="form-input" placeholder="+57 300 123 4567" required>
+        </div>
+        <div class="form-group">
+          <label for="regPassword">Contraseña</label>
+          <input type="password" id="regPassword" class="form-input" placeholder="Mínimo 6 caracteres" required minlength="6">
+        </div>
+        <div class="form-group">
+          <label for="regPasswordConfirm">Confirmar contraseña</label>
+          <input type="password" id="regPasswordConfirm" class="form-input" placeholder="Repite tu contraseña" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg" style="width:100%">Crear Cuenta</button>
+      </form>
+      <div class="auth-divider">o</div>
+      <p class="auth-switch">¿Ya tienes cuenta? <a id="showLogin">Inicia sesión</a></p>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       SECTION: LANDING PAGE
+       ══════════════════════════════════════════════════ -->
+  <main id="landing" class="page-section">
+
+    <!-- Hero -->
+    <section class="hero" id="heroSection">
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-tag">
+            <span class="dot"></span>
+            Nuevos diseños cada semana
+          </div>
+          <h1>
+            Diseña tu estilo,<br>
+            nosotros lo <span class="highlight">creamos</span>
+          </h1>
+          <p class="hero-description">
+            Productos de alta calidad que tú personalizas. Camisetas, buzos y más 
+            con tu texto, tu imagen o tu diseño favorito. Hazlo único, hazlo tuyo.
+          </p>
+          <div class="hero-btns">
+            <button class="btn btn-primary btn-lg" data-page="catalog">
+              Explorar Catálogo
+              <span class="btn-shimmer"></span>
+            </button>
+            <button class="btn btn-secondary btn-lg" data-page="catalog" data-filter="personalizable">
+              ✨ Personalizar
+            </button>
+          </div>
+          <div class="hero-stats">
+            <div class="hero-stat">
+              <div class="stat-number">2K+</div>
+              <div class="stat-label">Clientes felices</div>
+            </div>
+            <div class="hero-stat">
+              <div class="stat-number">500+</div>
+              <div class="stat-label">Diseños creados</div>
+            </div>
+            <div class="hero-stat">
+              <div class="stat-number">4.9</div>
+              <div class="stat-label">Calificación ★</div>
+            </div>
+          </div>
+        </div>
+        <div class="hero-images">
+          <div class="hero-img-float">
+            <img src="assets/images/tshirt-mint-school.jpeg" alt="Camiseta personalizada menta" loading="lazy">
+          </div>
+          <div class="hero-img-main">
+            <img src="assets/images/sweatshirt-burgundy.jpeg" alt="Buzo personalizado burgundy" loading="eager">
+          </div>
+          <div class="hero-img-float">
+            <img src="assets/images/tshirt-yellow-teacher.jpeg" alt="Camiseta personalizada amarilla" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="section" id="featuredSection">
+      <div class="container">
+        <h2 class="section-title">Productos Destacados</h2>
+        <p class="section-subtitle">Los favoritos de nuestros clientes, listos para que los personalices a tu gusto</p>
+        <div class="products-grid" id="featuredGrid">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="section" id="categoriesSection" style="background: var(--bg-secondary);">
+      <div class="container">
+        <h2 class="section-title">Explora por Categoría</h2>
+        <p class="section-subtitle">Encuentra el producto perfecto para cada ocasión especial</p>
+        <div class="categories-grid" id="categoriesGrid">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="section" id="stepsSection">
+      <div class="container">
+        <h2 class="section-title">¿Cómo Funciona?</h2>
+        <p class="section-subtitle">En tres simples pasos, tendrás tu producto personalizado</p>
+        <div class="steps-grid">
+          <div class="step-card animate-fade-in-up">
+            <div class="step-number">1</div>
+            <h3 class="step-title">Elige tu Producto</h3>
+            <p class="step-desc">Explora nuestro catálogo y selecciona el producto que más te guste entre camisetas, buzos y más.</p>
+          </div>
+          <div class="step-card animate-fade-in-up stagger-2">
+            <div class="step-number">2</div>
+            <h3 class="step-title">Personalízalo</h3>
+            <p class="step-desc">Agrega tu texto, elige colores, fuentes o sube tu propia imagen. Mira el preview en tiempo real.</p>
+          </div>
+          <div class="step-card animate-fade-in-up stagger-4">
+            <div class="step-number">3</div>
+            <h3 class="step-title">Recíbelo en Casa</h3>
+            <p class="step-desc">Realiza tu pedido y haz seguimiento. Tu producto personalizado llegará directo a tu puerta.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Custom CTA -->
+    <section class="section" id="customSection">
+      <div class="container">
+        <div class="custom-cta">
+          <div class="custom-cta-content">
+            <h2>Hazlo único, <span class="highlight">hazlo tuyo</span></h2>
+            <p>Nuestro personalizador te permite crear diseños únicos en minutos. Sin conocimientos de diseño necesarios.</p>
+            <div class="custom-cta-features">
+              <div class="feature-item">
+                <div class="feature-icon">✏️</div>
+                <span>Agrega texto personalizado con diferentes fuentes</span>
+              </div>
+              <div class="feature-item">
+                <div class="feature-icon">🎨</div>
+                <span>Elige entre una amplia paleta de colores</span>
+              </div>
+              <div class="feature-item">
+                <div class="feature-icon">📷</div>
+                <span>Sube tu propia imagen o diseño</span>
+              </div>
+              <div class="feature-item">
+                <div class="feature-icon">👁️</div>
+                <span>Preview en tiempo real antes de comprar</span>
+              </div>
+            </div>
+            <button class="btn btn-primary btn-lg" data-page="catalog" data-filter="personalizable">
+              Empezar a Personalizar →
+            </button>
+          </div>
+          <div class="custom-cta-images">
+            <img src="assets/images/sweatshirt-orange-halloween.jpeg" alt="Producto personalizable" loading="lazy">
+            <img src="assets/images/body-baby-halloween.jpeg" alt="Body personalizable" loading="lazy">
+            <img src="assets/images/tshirt-black-halloween.jpeg" alt="Camiseta personalizable" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section" id="testimonialsSection" style="background: var(--bg-secondary);">
+      <div class="container">
+        <h2 class="section-title">Lo que Dicen Nuestros Clientes</h2>
+        <p class="section-subtitle">Miles de personas ya confían en Mym Designsx para sus productos personalizados</p>
+        <div class="testimonials-slider">
+          <div class="testimonials-track" id="testimonialsTrack">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+        <div class="testimonials-dots" id="testimonialsDots">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="faqSection">
+      <div class="container">
+        <h2 class="section-title">Preguntas Frecuentes</h2>
+        <p class="section-subtitle">Resolvemos tus dudas más comunes</p>
+        <div class="faq-list" id="faqList">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="footerSection">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <div class="navbar-logo">Mym<span> Designsx</span></div>
+            <p>Tu destino para productos personalizados de alta calidad. Diseña, personaliza y recibe en tu puerta.</p>
+            <div class="footer-social">
+              <a href="#" title="Instagram">📸</a>
+              <a href="#" title="Facebook">📘</a>
+              <a href="#" title="TikTok">🎵</a>
+              <a href="#" title="WhatsApp">💬</a>
+            </div>
+          </div>
+          <div class="footer-col">
+            <h4>Tienda</h4>
+            <ul>
+              <li><a href="#" data-page="catalog">Catálogo</a></li>
+              <li><a href="#" data-page="catalog" data-filter="mujer">Mujer</a></li>
+              <li><a href="#" data-page="catalog" data-filter="hombre">Hombre</a></li>
+              <li><a href="#" data-page="catalog" data-filter="bebe">Bebé</a></li>
+              <li><a href="#" data-page="catalog" data-filter="personalizable">Personalizar</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Temporadas</h4>
+            <ul>
+              <li><a href="#" data-page="catalog" data-filter="halloween">Halloween 🎃</a></li>
+              <li><a href="#" data-page="catalog" data-filter="navidad">Navidad 🎄</a></li>
+              <li><a href="#" data-page="catalog" data-filter="sanvalentin">San Valentín 💕</a></li>
+              <li><a href="#" data-page="catalog" data-filter="madre">Día de la Madre 💐</a></li>
+              <li><a href="#" data-page="catalog" data-filter="padre">Día del Padre 🎩</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Soporte</h4>
+            <ul>
+              <li><a href="#">Centro de ayuda</a></li>
+              <li><a href="#">Envíos y entregas</a></li>
+              <li><a href="#">Devoluciones</a></li>
+              <li><a href="#">Guía de tallas</a></li>
+              <li><a href="#">Contacto</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>© 2026 Mym Designsx. Todos los derechos reservados. Creado por Eidan Carreño.</p>
+          <p>Términos y Condiciones · Política de Privacidad</p>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <!-- ══════════════════════════════════════════════════
+       SECTION: CATALOG
+       ══════════════════════════════════════════════════ -->
+  <section id="catalog" class="page-section hidden">
+    <div class="catalog-page">
+      <div class="container">
+        <div class="catalog-header">
+          <h1>Nuestro Catálogo</h1>
+          <p class="section-subtitle" style="text-align:left;margin:0">Explora toda nuestra colección y encuentra tu producto ideal</p>
+        </div>
+
+        <div class="catalog-toolbar">
+          <div class="catalog-search">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="catalogSearch" placeholder="Buscar productos...">
+          </div>
+          <div class="catalog-filters" id="catalogFilterChips">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <div class="catalog-layout">
+          <aside class="filter-sidebar" id="filterSidebar">
+            <div class="filter-group">
+              <h3>Categorías</h3>
+              <div id="filterCategories">
+                <!-- Rendered by JS -->
+              </div>
+            </div>
+            <div class="filter-group">
+              <h3>Precio</h3>
+              <div class="price-range">
+                <input type="number" id="priceMin" placeholder="Min" min="0">
+                <span>—</span>
+                <input type="number" id="priceMax" placeholder="Max">
+              </div>
+            </div>
+            <div class="filter-group">
+              <h3>Talla</h3>
+              <div class="size-options" id="filterSizes">
+                <!-- Rendered by JS -->
+              </div>
+            </div>
+            <div class="filter-group">
+              <h3>Color</h3>
+              <div class="filter-color-options" id="filterColors">
+                <!-- Rendered by JS -->
+              </div>
+            </div>
+          </aside>
+
+          <div>
+            <p class="products-count" id="productsCount">12 productos</p>
+            <div class="products-grid" id="catalogGrid" style="grid-template-columns: repeat(3, 1fr);">
+              <!-- Rendered by JS -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════
+       SECTION: PRODUCT DETAIL
+       ══════════════════════════════════════════════════ -->
+  <section id="productDetail" class="page-section hidden">
+    <div class="product-detail-page">
+      <div class="container">
+        <div class="back-btn" data-page="catalog">← Volver al catálogo</div>
+        <div class="product-detail" id="productDetailContent">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════
+       SECTION: CUSTOMIZER
+       ══════════════════════════════════════════════════ -->
+  <section id="customizer" class="page-section hidden">
+    <div class="customizer-page">
+      <div class="container">
+        <div class="back-btn" id="customizerBack">← Volver al producto</div>
+        <h1 style="font-size:2rem;font-weight:800;margin-bottom:var(--space-xl)">Personaliza tu Producto</h1>
+        <div class="customizer-layout">
+          <div class="customizer-preview" id="customizerPreview">
+            <div class="customizer-preview-img">
+              <img id="customizerImg" src="" alt="Preview del producto">
+              <div class="customizer-text-overlay" id="customizerOverlay">Tu texto aquí</div>
+            </div>
+            <p style="color:var(--text-muted);font-size:0.85rem;margin-top:var(--space-sm)">Vista previa del diseño</p>
+          </div>
+          <div class="customizer-controls">
+            <div class="customizer-section">
+              <h3>✏️ Texto Personalizado</h3>
+              <input type="text" class="customizer-input" id="customText" placeholder="Escribe tu texto aquí..." maxlength="50">
+              <p style="font-size:0.75rem;color:var(--text-muted);margin-top:var(--space-xs)"><span id="charCount">0</span>/50 caracteres</p>
+            </div>
+            <div class="customizer-section">
+              <h3>🔤 Fuente</h3>
+              <div class="font-options" id="fontOptions">
+                <!-- Rendered by JS -->
+              </div>
+            </div>
+            <div class="customizer-section">
+              <h3>🎨 Color del Texto</h3>
+              <div class="color-picker-row" id="textColorPicker">
+                <!-- Rendered by JS -->
+              </div>
+            </div>
+            <div class="customizer-section">
+              <h3>📷 Sube tu Imagen</h3>
+              <div class="upload-area" id="uploadArea">
+                <div class="upload-icon">📤</div>
+                <p>Arrastra tu imagen aquí o haz clic para seleccionar</p>
+                <p class="upload-hint">JPG, PNG (máx. 5MB)</p>
+                <input type="file" id="uploadInput" accept="image/*" style="display:none">
+              </div>
+              <div id="uploadPreview" class="hidden" style="margin-top:var(--space-md);text-align:center;">
+                <img id="uploadedImg" style="max-width:100%;max-height:150px;border-radius:var(--radius-sm);" alt="Imagen subida">
+                <button class="btn btn-ghost btn-sm" id="removeUpload" style="margin-top:var(--space-sm);color:var(--error)">Eliminar imagen</button>
+              </div>
+            </div>
+            <button class="btn btn-primary btn-lg" style="width:100%" id="addCustomToCart">
+              🛒 Agregar al Carrito con Personalización
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════
+       SECTION: CHECKOUT
+       ══════════════════════════════════════════════════ -->
+  <section id="checkout" class="page-section hidden">
+    <div class="checkout-page">
+      <div class="container">
+        <div class="back-btn" data-page="landing">← Volver a la tienda</div>
+        <h1 style="font-size:2rem;font-weight:800;margin-bottom:var(--space-2xl)">Finalizar Compra</h1>
+        <div class="checkout-layout">
+          <div class="checkout-form">
+            <div class="checkout-section">
+              <h2>📦 Información de Envío</h2>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="shipName">Nombre</label>
+                  <input type="text" id="shipName" class="form-input" placeholder="Tu nombre" required>
+                </div>
+                <div class="form-group">
+                  <label for="shipLastname">Apellido</label>
+                  <input type="text" id="shipLastname" class="form-input" placeholder="Tu apellido" required>
+                </div>
+                <div class="form-group full-width">
+                  <label for="shipAddress">Dirección</label>
+                  <input type="text" id="shipAddress" class="form-input" placeholder="Calle, número, apartamento" required>
+                </div>
+                <div class="form-group">
+                  <label for="shipCity">Ciudad</label>
+                  <input type="text" id="shipCity" class="form-input" placeholder="Tu ciudad" required>
+                </div>
+                <div class="form-group">
+                  <label for="shipPhone">Teléfono</label>
+                  <input type="tel" id="shipPhone" class="form-input" placeholder="+57 300 123 4567" required>
+                </div>
+                <div class="form-group full-width">
+                  <label for="shipEmail">Correo Electrónico (Para recibo)</label>
+                  <input type="email" id="shipEmail" class="form-input" placeholder="tu@gmail.com" required>
+                </div>
+              </div>
+            </div>
+            <div class="checkout-section">
+              <h2>💳 Información de Pago</h2>
+              <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:var(--space-md);">⚠️ Este es un pago simulado. No se procesará ningún cargo real.</p>
+              <div class="form-grid">
+                <div class="form-group full-width">
+                  <label for="cardName">Nombre en la tarjeta</label>
+                  <input type="text" id="cardName" class="form-input" placeholder="Nombre como aparece en la tarjeta" required>
+                </div>
+                <div class="form-group full-width">
+                  <label for="cardNumber">Número de tarjeta</label>
+                  <input type="text" id="cardNumber" class="form-input" placeholder="1234 5678 9012 3456" maxlength="19" required>
+                </div>
+                <div class="form-group">
+                  <label for="cardExpiry">Fecha de expiración</label>
+                  <input type="text" id="cardExpiry" class="form-input" placeholder="MM/AA" maxlength="5" required>
+                </div>
+                <div class="form-group">
+                  <label for="cardCvv">CVV</label>
+                  <input type="text" id="cardCvv" class="form-input" placeholder="123" maxlength="4" required>
+                </div>
+              </div>
+            </div>
+            <button class="btn btn-gold btn-lg" style="width:100%" id="confirmPayment">
+              🔒 Confirmar Compra
+              <span class="btn-shimmer"></span>
+            </button>
+          </div>
+          <div class="order-summary" id="checkoutSummary">
+            <h2>Resumen del Pedido</h2>
+            <div class="order-items" id="checkoutItems">
+              <!-- Rendered by JS -->
+            </div>
+            <div class="order-totals" id="checkoutTotals">
+              <!-- Rendered by JS -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════
+       SECTION: TICKET
+       ══════════════════════════════════════════════════ -->
+  <section id="ticket" class="page-section hidden">
+    <div class="ticket-page">
+      <div class="ticket-container">
+        <div class="ticket-success-icon">✅</div>
+        <h1>¡Compra Exitosa!</h1>
+        <p class="ticket-subtitle">Tu pedido ha sido confirmado. Aquí tienes tu ticket.</p>
+        <div class="ticket-card" id="ticketCard">
+          <!-- Rendered by JS -->
+        </div>
+        <div class="ticket-actions">
+          <button class="btn btn-secondary" id="printTicket">🖨️ Imprimir Ticket</button>
+          <button class="btn btn-primary" data-page="profile" data-tab="orders">📦 Ver Mis Pedidos</button>
+          <button class="btn btn-ghost" data-page="landing">← Seguir Comprando</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════
+       SECTION: PROFILE
+       ══════════════════════════════════════════════════ -->
+  <section id="profile" class="page-section hidden">
+    <div class="profile-page">
+      <div class="container">
+        <div class="profile-header" id="profileHeader">
+          <!-- Rendered by JS -->
+        </div>
+        <div class="profile-tabs" id="profileTabs">
+          <div class="profile-tab active" data-tab="personal">Datos Personales</div>
+          <div class="profile-tab" data-tab="address">Dirección</div>
+          <div class="profile-tab" data-tab="orders">Mis Pedidos</div>
+          <div class="profile-tab" data-tab="favorites">Favoritos</div>
+        </div>
+        <div class="profile-content" id="profileContent">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════
+       SECTION: ORDER TRACKING
+       ══════════════════════════════════════════════════ -->
+  <section id="orderTracking" class="page-section hidden">
+    <div class="product-detail-page">
+      <div class="container">
+        <div class="back-btn" data-page="profile" data-tab="orders">← Volver a mis pedidos</div>
+        <div id="orderTrackingContent">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════
+       SECTION: ADMIN
+       ══════════════════════════════════════════════════ -->
+  <section id="admin" class="page-section hidden">
+    <div class="admin-page">
+      <div class="container">
+        <div class="admin-header">
+          <h1>Panel de Administración</h1>
+          <button class="btn btn-secondary btn-sm" data-page="landing">← Volver a la tienda</button>
+        </div>
+        <div class="admin-stats" id="adminStats">
+          <!-- Rendered by JS -->
+        </div>
+        <div class="admin-tabs" id="adminTabs">
+          <div class="admin-tab active" data-tab="products">Productos</div>
+          <div class="admin-tab" data-tab="orders">Pedidos</div>
+          <div class="admin-tab" data-tab="categories">Categorías</div>
+        </div>
+        <div id="adminContent">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ SCRIPTS ═══ -->
+  <script src="js/data.js"></script>
+  <script src="js/n8n.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/customizer.js"></script>
+  <script src="js/orders.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

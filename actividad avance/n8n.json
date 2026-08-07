@@ -1,0 +1,709 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "6c7072ef-d6be-4c41-a219-b634d033012c",
+              "name": "id",
+              "value": "={{ $json.body.user.id }}",
+              "type": "string"
+            },
+            {
+              "id": "c2cf2add-e921-48bd-8e3e-5b342d279e44",
+              "name": "Nombre",
+              "value": "={{ $json.body.user.name }}",
+              "type": "string"
+            },
+            {
+              "id": "53435a13-fade-4046-a415-b85c2eef7dad",
+              "name": "Apellido",
+              "value": "={{ $json.body.user.lastname }}",
+              "type": "string"
+            },
+            {
+              "id": "cb4061f6-1377-4eb7-ab45-e3034b293dae",
+              "name": "Correo electrónico",
+              "value": "={{ $json.body.user.email }}",
+              "type": "string"
+            },
+            {
+              "id": "677aff14-68e5-48ab-98e0-696dffe27aa5",
+              "name": "Teléfono",
+              "value": "={{ $json.body.user.phone }}",
+              "type": "string"
+            },
+            {
+              "id": "0b1a66c3-a0cf-4fad-bf4d-bfbfc7e7965a",
+              "name": "Contraseña",
+              "value": "={{ $json.body.user.password }}",
+              "type": "string"
+            },
+            {
+              "id": "aea6e3ea-f443-4be2-8634-5ff1082a0b12",
+              "name": "creación",
+              "value": "={{ $json.body.user.createdAt }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        224,
+        0
+      ],
+      "id": "11e4eb16-0471-4480-8e74-a4242a47e528",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "d6e7e6d6-3d2b-4a00-98e0-f63afb8369ca",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "b07dfc01-f867-42d1-b012-d1315054ef65",
+      "name": "webhook registrar",
+      "webhookId": "d6e7e6d6-3d2b-4a00-98e0-f63afb8369ca"
+    },
+    {
+      "parameters": {
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "registro_mym",
+          "mode": "list",
+          "cachedResultName": "registro_mym"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ $json.body.user.id }}",
+            "name": "={{ $json.body.user.name }}",
+            "lastname": "={{ $json.body.user.lastname }}",
+            "email": "={{ $json.body.user.email }}",
+            "phone": "={{ $json.body.user.phone }}",
+            "password": "={{ $json.body.user.password }}",
+            "created_at": "={{ $json.body.user.createdAt }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": true,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "lastname",
+              "displayName": "lastname",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "phone",
+              "displayName": "phone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "password",
+              "displayName": "password",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "created_at",
+              "displayName": "created_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        448,
+        0
+      ],
+      "id": "5986e96e-da8b-411e-b308-e160ecc969f1",
+      "name": "Insert rows in a table",
+      "credentials": {
+        "postgres": {
+          "id": "OHydcsLs1sqJ2lYv",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "6c7072ef-d6be-4c41-a219-b634d033012c",
+              "name": "ID",
+              "value": "={{ $json.body.order.id }}",
+              "type": "string"
+            },
+            {
+              "id": "c2cf2add-e921-48bd-8e3e-5b342d279e44",
+              "name": "Nombre",
+              "value": "={{ $json.body.customer.name }}",
+              "type": "string"
+            },
+            {
+              "id": "cb4061f6-1377-4eb7-ab45-e3034b293dae",
+              "name": "direccion",
+              "value": "={{ $json.body.shipping.address }}",
+              "type": "string"
+            },
+            {
+              "id": "677aff14-68e5-48ab-98e0-696dffe27aa5",
+              "name": "ciudad",
+              "value": "={{ $json.body.shipping.city }}",
+              "type": "string"
+            },
+            {
+              "id": "aea6e3ea-f443-4be2-8634-5ff1082a0b12",
+              "name": "correo Electrónico",
+              "value": "={{ $json.body.customer.email }}",
+              "type": "string"
+            },
+            {
+              "id": "989f0422-c67e-4b02-9c36-7dd0e14c1939",
+              "name": "Telefono",
+              "value": "={{ $json.body.shipping.phone }}",
+              "type": "string"
+            },
+            {
+              "id": "ce6f887d-f0f0-48af-a7c4-b1acb3e8135e",
+              "name": "nombre Tarjeta",
+              "value": "={{ $json.body.shipping.name }}",
+              "type": "string"
+            },
+            {
+              "id": "da2a2ca3-6c53-4c85-81e3-22ccda8c720e",
+              "name": "Producto Comprado",
+              "value": "={{ $json.body.items[0].name }}",
+              "type": "string"
+            },
+            {
+              "id": "44288816-662a-4e09-b428-d38606c71917",
+              "name": "Cantidad y talla",
+              "value": "={{ $json.body.items[0].quantity }}|{{ $json.body.items[0].size }}",
+              "type": "string"
+            },
+            {
+              "id": "d9d19902-0e85-45b2-84da-a2355e1e4727",
+              "name": "Precio Subtotal",
+              "value": "={{ $json.body.formattedTotals.subtotal }}",
+              "type": "string"
+            },
+            {
+              "id": "1ef67efc-7501-47b1-ba66-e463f8b066ba",
+              "name": "Impuestos",
+              "value": "={{ $json.body.formattedTotals.tax }}",
+              "type": "string"
+            },
+            {
+              "id": "d308fed8-f338-4ccf-a952-bacd7ae78307",
+              "name": "Total Pago",
+              "value": "={{ $json.body.formattedTotals.total }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        224,
+        224
+      ],
+      "id": "cd4774d4-8783-467d-8967-8715b7f13fd7",
+      "name": "Edit Fields2"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.body.customer.email }}",
+        "subject": "={{ $json.body.event }} Mym Designsx",
+        "message": "=<!DOCTYPE html> <html> <head> <meta charset=\"UTF-8\"> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"> <title>Recibo de tu Pedido</title> </head> <body style=\"margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f4f9; color: #333333;\">    <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background-color: #f4f4f9; padding: 40px 20px;\">     <tr>       <td align=\"center\">                  <!-- Tarjeta Principal -->         <table width=\"600\" cellpadding=\"0\" cellspacing=\"0\" style=\"background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05);\">                      <!-- Encabezado -->           <tr>             <td style=\"background-color: #1a1a1a; padding: 40px 20px; text-align: center;\">               <h1 style=\"color: #ffffff; margin: 0; font-size: 28px; letter-spacing: 2px;\">MYM DESIGNSX</h1>               <p style=\"color: #a8a8a8; margin: 10px 0 0 0; font-size: 16px;\">¡Gracias por tu compra!</p>             </td>           </tr>            <!-- Mensaje -->           <tr>             <td style=\"padding: 40px 40px 20px 40px;\">               <p style=\"margin: 0; font-size: 18px; line-height: 1.6;\">Hola <strong>{{ $json.body.customer.name }}</strong>,</p>               <p style=\"margin: 15px 0 0 0; font-size: 16px; line-height: 1.6; color: #555555;\">                 Hemos recibido tu pedido correctamente. Lo estamos preparando con mucho cuidado y pronto te notificaremos cuando sea enviado.               </p>             </td>           </tr>            <!-- Detalles del Pedido -->           <tr>             <td style=\"padding: 20px 40px;\">               <div style=\"background-color: #f9f9fc; border-radius: 8px; padding: 20px;\">                 <h3 style=\"margin: 0 0 15px 0; font-size: 16px; color: #1a1a1a; text-transform: uppercase;\">Detalles del Pedido #{{ $json.body.order.orderNumber }}</h3>                                  <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"font-size: 15px;\">                   <!-- Lista de productos dinámica -->                   {{ $json.body.items.map(item => `                   <tr>                     <td style=\"padding: 10px 0; border-bottom: 1px solid #eeeeee;\">                       <strong>${item.quantity}x</strong> ${item.name}                        <br>                       <span style=\"font-size: 13px; color: #777777;\">Talla: ${item.size} | Color: ${item.color}</span>                     </td>                     <td align=\"right\" style=\"padding: 10px 0; border-bottom: 1px solid #eeeeee; font-weight: bold;\">                       $${item.totalPrice.toLocaleString()}                     </td>                   </tr>                   `).join('') }}                 </table>                  <!-- Totales -->                 <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"font-size: 15px; margin-top: 15px;\">                   <tr>                     <td style=\"padding: 5px 0; color: #777777;\">Subtotal:</td>                     <td align=\"right\" style=\"padding: 5px 0;\">{{ $json.body.formattedTotals.subtotal }}</td>                   </tr>                   <tr>                     <td style=\"padding: 5px 0; color: #777777;\">Impuestos:</td>                     <td align=\"right\" style=\"padding: 5px 0;\">{{ $json.body.formattedTotals.tax }}</td>                   </tr>                   <tr>                     <td style=\"padding: 15px 0 0 0; font-weight: bold; font-size: 18px; color: #1a1a1a;\">TOTAL:</td>                     <td align=\"right\" style=\"padding: 15px 0 0 0; font-weight: bold; font-size: 18px; color: #1a1a1a;\">                       {{ $json.body.formattedTotals.total }}                     </td>                   </tr>                 </table>               </div>             </td>           </tr>            <!-- Información de Envío -->           <tr>             <td style=\"padding: 20px 40px 40px 40px;\">               <h3 style=\"margin: 0 0 10px 0; font-size: 16px; color: #1a1a1a; text-transform: uppercase;\">Dirección de Envío</h3>               <p style=\"margin: 0; font-size: 15px; line-height: 1.6; color: #555555;\">                 {{ $json.body.shipping.name }}<br>                 {{ $json.body.shipping.address }}<br>                 {{ $json.body.shipping.city }}<br>                 Tel: {{ $json.body.shipping.phone }}               </p>             </td>           </tr>            <!-- Pie de página -->           <tr>             <td style=\"background-color: #f9f9fc; padding: 20px; text-align: center; border-top: 1px solid #eeeeee;\">               <p style=\"margin: 0; font-size: 13px; color: #888888;\">                 © 2026 MYM DESIGNSX. Todos los derechos reservados.<br>                 Si tienes alguna pregunta, responde a este correo.               </p>             </td>           </tr>          </table>                </td>     </tr>   </table>  </body> </html>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        448,
+        224
+      ],
+      "id": "e86de927-2738-4a58-bb3f-ee5028beb15b",
+      "name": "Send a message",
+      "webhookId": "38ac20c1-df03-44f8-aeeb-1e4ff2a27a69",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "5fiAq4Oc6X2kDPKH",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1wepamlijrbmK5viDwVuKaI3yrmWkKYjGrq6nHNK74vg",
+          "mode": "list",
+          "cachedResultName": "Registro Pedidos Mym Designsx",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1wepamlijrbmK5viDwVuKaI3yrmWkKYjGrq6nHNK74vg/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1wepamlijrbmK5viDwVuKaI3yrmWkKYjGrq6nHNK74vg/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ $('Edit Fields2').item.json.body.order.id }}",
+            "orderNumber": "={{ $('Edit Fields2').item.json.body.order.orderNumber }}",
+            "name": "={{ $('Edit Fields2').item.json.body.customer.name }}",
+            "email": "={{ $('Edit Fields2').item.json.body.customer.email }}",
+            "phone": "={{ $('Edit Fields2').item.json.body.customer.phone }}",
+            "address": "={{ $('Edit Fields2').item.json.body.shipping.address }}",
+            "city": "={{ $('Edit Fields2').item.json.body.shipping.city }}",
+            "subtotal": "={{ $('Edit Fields2').item.json['Precio Subtotal'] }}",
+            "total": "={{ $('Edit Fields2').item.json['Total Pago'] }}",
+            "tax Included": "={{ $('Edit Fields2').item.json.body.formattedTotals.tax }}",
+            "Purchase Information ": "={{ $('Edit Fields2').item.json.body.items.map(item => item.quantity + 'x ' + item.name + ' (Talla: ' + item.size + ')').join(' | ') }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "orderNumber",
+              "displayName": "orderNumber",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "phone",
+              "displayName": "phone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "address",
+              "displayName": "address",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "city",
+              "displayName": "city",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Purchase Information ",
+              "displayName": "Purchase Information ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "subtotal",
+              "displayName": "subtotal",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "tax Included",
+              "displayName": "tax Included",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "total",
+              "displayName": "total",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        672,
+        224
+      ],
+      "id": "0f682ba4-12b4-4746-aeea-fd70d6097d2f",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "dyMGwccB2xEXoasA",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT id, email, password, name, lastname, phone FROM registro_mym WHERE email = '{{ $json.body.credentials.email }}' AND PASSWORD = '{{ $json.body.credentials.password }}';\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        224,
+        544
+      ],
+      "id": "72782bd0-8a18-4b48-a4a2-7474249914ff",
+      "name": "Execute a SQL query",
+      "credentials": {
+        "postgres": {
+          "id": "OHydcsLs1sqJ2lYv",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "64f669ba-9869-48cf-912e-565408c798d5",
+              "leftValue": "={{ $json.email }}",
+              "rightValue": "={{ $json.email }}",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "28ed334a-e35d-4487-b914-163a147b5f3e",
+              "leftValue": "={{ $json.id }}",
+              "rightValue": "={{ $json.password }}",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        432,
+        544
+      ],
+      "id": "8788c366-f660-44bf-b4b0-069175674425",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"status\": \"success\",\n  \"userData\": {\n    \"id\": \"{{ $json.id }}\",\n    \"name\": \"{{ $json.name }}\",\n    \"lastname\": \"{{ $json.lastname }}\",\n    \"email\": \"{{ $json.email }}\",\n    \"phone\": \"{{ $json.phone }}\",\n    \"role\": \"user\"\n  }\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        656,
+        480
+      ],
+      "id": "09280040-3376-4637-85d5-960d3375a0d9",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\n  \"status\": \"error\",\n  \"message\": \"Correo o contraseña incorrectos. Por favor, verifica tus datos.\"\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        656,
+        656
+      ],
+      "id": "cf6234e8-6466-43d4-94be-e241daf0ace3",
+      "name": "Respond to Webhook1"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "f4192917-d1af-40b6-bf92-39209b463c5f",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        544
+      ],
+      "id": "98c9a7fb-99f6-4807-b717-bb7988222732",
+      "name": "Webhook verificar usuario",
+      "webhookId": "f4192917-d1af-40b6-bf92-39209b463c5f"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "a87d75db-9330-4514-962e-88a1bb7196b6",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        224
+      ],
+      "id": "1e3552b0-6eae-4a2b-872a-f19839812706",
+      "name": "Webhook compra",
+      "webhookId": "a87d75db-9330-4514-962e-88a1bb7196b6"
+    }
+  ],
+  "connections": {
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Insert rows in a table",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "webhook registrar": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields2": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute a SQL query": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respond to Webhook1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook verificar usuario": {
+      "main": [
+        [
+          {
+            "node": "Execute a SQL query",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook compra": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "31ed7db065670a3788345fc28c9d9ed4b1413919636927d1856d3035ea13f0f2"
+  }
+}
