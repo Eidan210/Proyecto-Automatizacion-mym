@@ -161,4 +161,4 @@ VALUES ('admin-001', 'Admin', 'Mym', 'admin@mym.com', '+57 300 000 0000', 'YWRta
 
 ## Autor
 
-Eidan Carreño - 2026
+Eidan Cuadros - 2026
