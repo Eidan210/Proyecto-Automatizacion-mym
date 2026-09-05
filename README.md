@@ -7,8 +7,10 @@ Google Sheets.
 
 `JavaScript (ES6+)` · `HTML5` · `CSS3` · `n8n` · `PostgreSQL` · `Google Sheets` · `Gmail`
 
-LINK PAGINA WEB: https://eidan210.github.io/Proyecto-Automatizacion-mym/app/index.html
+
 ---
+
+LINK PAGINA WEB: https://eidan210.github.io/Proyecto-Automatizacion-mym/app/index.html
 
 ## El problema
 
