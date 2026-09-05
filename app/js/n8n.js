@@ -11,8 +11,9 @@
 // ── Configuración de Webhooks ──
 // Configurado para n8n local (por defecto en el puerto 5678)
 const N8N_CONFIG = {
-  // URL base de tu instancia de n8n local (sin / al final)
-  baseUrl: 'https://flatly-handbook-epiphany.ngrok-free.dev',
+  // URL base de tu instancia de n8n, expuesta con ngrok (sin / al final).
+  // Ver el paso 7 del README: reemplaza este valor por tu propia URL.
+  baseUrl: 'https://TU-URL-DE-NGROK-AQUI',
 
   // Endpoints de webhooks
   // NOTA: Si estás probando/creando el flujo en n8n, cambia "/webhook/" por "/webhook-test/"
