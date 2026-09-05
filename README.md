@@ -31,10 +31,10 @@ El pago es simulado: no se cobra nada real.
 
 ## Estructura
 
-El código de la aplicación vive en [`actividad avance/`](./actividad%20avance/):
+El código de la aplicación vive en [`app/`](./app/):
 
 ```
-actividad avance/
+app/
 ├── index.html          → la SPA entera en un solo HTML
 ├── n8n.json            → el flujo de n8n, listo para importar
 ├── css/styles.css
@@ -51,11 +51,11 @@ actividad avance/
 ```
 
 Ocho módulos con una responsabilidad cada uno. La guía completa de instalación de n8n está en
-el [README de la aplicación](./actividad%20avance/README.md).
+el [README de la aplicación](./app/README.md).
 
 ## Cómo ejecutarlo
 
-No necesita instalación: abre `actividad avance/index.html` en el navegador, o usa la extensión
+No necesita instalación: abre `app/index.html` en el navegador, o usa la extensión
 **Live Server** de VS Code.
 
 > Sin n8n configurado el catálogo y el personalizador funcionan, pero no se puede registrar ni
